@@ -27,12 +27,7 @@ class Song
   end
 
   def self.find_by_name(name)
-  	@@all.each {|song|
-  		if song.name == name
-  			return song
-  		end
-  	}
-  	return nil
+  	@@all.find {|song| song.name == name}
   end
 
   def self.find_or_create_by_name(name)
@@ -63,11 +58,7 @@ class Song
   	alph_lst = []
   	songs_lst = @@all.map {|song| song.name}
   	songs_lst.sort.each {|title|
-  		@@all.each {|song| 
-  			if song.name == title
-	  			alph_lst.push(song)
-	  		end
-  		}
+  		alph_lst.push(@@all.find {|song| song.name == title})
   	}
   	return alph_lst
   end
